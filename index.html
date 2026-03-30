@@ -166,13 +166,61 @@
 </section>
 
 <!-- ── CONTACT ── -->
-<section class="contact" id="contact" style="background: var(--bg-section); padding: 80px 5%;">
+<style>
+  /* ── FLEXBOX LAYOUT ENGINE ── */
+  .contact-container {
+    display: flex;
+    flex-direction: row; /* Side-by-side on Web */
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
+  }
+
+  .contact-info {
+    flex: 1; /* Left half */
+  }
+
+  .contact-form {
+    flex: 1.2; /* Right half (slightly wider for the inputs) */
+    background: rgba(255, 255, 255, 0.03); /* Subtle background contrast */
+    padding: 2.5rem;
+    border-radius: 15px;
+    border: 1px solid rgba(201, 168, 76, 0.1);
+  }
+
+  /* 📱 MOBILE RESPONSIVENESS ── */
+  @media (max-width: 992px) {
+    .contact-container {
+      flex-direction: column; /* Stack vertically on mobile */
+      gap: 3rem;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr !important; /* Stack Name/Email inputs */
+      gap: 1rem !important;
+    }
+
+    .contact-form {
+      width: 100%;
+      padding: 1.5rem !important;
+    }
+
+    .section-title {
+      font-size: 2.2rem !important;
+    }
+  }
+</style>
+
+<section class="contact" id="contact" style="background: var(--bg-section); padding: 100px 5%;">
   <div class="contact-container">
     
     <div class="contact-info">
       <div class="section-label">Get In Touch</div>
       <h2 class="section-title">Let's Build Something Great Together</h2>
-      <p style="margin-bottom: 2rem; color: var(--text-muted);">Fill in the form and our team will get back to you within 24 hours with a tailored solution for your restaurant.</p>
+      <p style="margin-bottom: 2rem; color: var(--text-muted); line-height: 1.6;">
+        Fill in the form and our team will get back to you within 24 hours with a tailored solution for your restaurant.
+      </p>
       
       <div class="info-item">
         <div class="info-icon">📧</div>
@@ -204,17 +252,19 @@
             <input type="email" id="femail" placeholder="john@restaurant.com" required />
           </div>
         </div>
+
         <div class="form-group">
-            <label>Phone Number</label>
-            <input 
-              type="tel" 
-              id="fphone" 
-              placeholder="+44 7700 000000" 
-              inputmode="numeric" 
-              pattern="[+0-9]*"
-              oninput="this.value = this.value.replace(/[^0-9+]/g, '')"
-            />
-          </div>
+          <label>Phone Number</label>
+          <input 
+            type="tel" 
+            id="fphone" 
+            placeholder="+44 7700 000000" 
+            inputmode="numeric" 
+            pattern="[+0-9]*"
+            oninput="this.value = this.value.replace(/[^0-9+]/g, '')"
+          />
+        </div>
+
         <div class="form-group">
           <label>Service Interested In *</label>
           <select id="fservice" required>
@@ -227,21 +277,24 @@
             <option>All Services / Full Package</option>
           </select>
         </div>
+
         <div class="form-group">
           <label>Message</label>
-          <textarea id="fmessage" placeholder="Tell us about your restaurant..."></textarea>
+          <textarea id="fmessage" placeholder="Tell us about your restaurant..." style="min-height: 100px; resize: vertical;"></textarea>
         </div>
 
-        <div style="margin-bottom: 1.5rem;">
+        <div style="margin-bottom: 1.5rem; display: flex; justify-content: center;">
            <div class="g-recaptcha" data-sitekey="6Lc6bJ4sAAAAAC_Ll696ZE8kd_dvSsYHttG_4pbj"></div>
         </div>
 
         <button type="submit" class="form-submit" id="submitBtn">Send Enquiry →</button>
         
-        <div class="success-msg" id="successMsg">
+        <div class="success-msg" id="successMsg" style="display:none; text-align:center; margin-top:1rem; color:#34D399; font-weight:600;">
           ✅ Thank you! Your enquiry has been submitted.
         </div>
-        <p style="font-size:0.72rem;color:var(--text-muted);margin-top:0.75rem;text-align:center;">Your data is stored securely in Google Server.</p>
+        <p style="font-size:0.72rem; color:var(--text-muted); margin-top:0.75rem; text-align:center;">
+          Your data is stored securely in Google Server.
+        </p>
       </form>
     </div>
 
