@@ -205,12 +205,12 @@
             <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #9999AA;">Monthly Turnover (£) *</label>
             <div style="position: relative;">
                <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #C9A84C; pointer-events: none; font-weight: bold;">£</span>
-               <input type="text" id="fturnover" placeholder="10,000" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required style="width: 100%; padding: 0.85rem 0.85rem 0.85rem 32px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;">
+               <input type="text" id="fturnover" placeholder="10,000" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required style="width: 100%; padding: 0.85rem 0.85rem 0.85rem 32px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;">
             </div>
           </div>
           <div class="form-group">
             <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #9999AA;">Monthly Transactions *</label>
-            <input type="text" id="ftransactions" placeholder="e.g. 500" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required style="width: 100%; padding: 0.85rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;">
+            <input type="text" id="ftransactions" placeholder="e.g. 500" inputmode="numeric"  oninput="this.value = this.value.replace(/[^0-9]/g, '')" required style="width: 100%; padding: 0.85rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;">
           </div>
         </div>
         <div class="form-group" style="margin-bottom: 2rem;">
