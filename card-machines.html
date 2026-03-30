@@ -216,6 +216,11 @@
           <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #9999AA;">Problem with current provider?</label>
           <textarea id="fproblem" placeholder="High rates, slow terminal..." style="width: 100%; padding: 0.85rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; min-height: 80px;"></textarea>
         </div>
+
+        <div style="margin-bottom: 1.5rem;">
+            <div class="g-recaptcha" data-sitekey="6Lf0aJ4sAAAAAM8bgZxzCzH8qaiUtuH6wWCkWQtY"></div>
+        </div>
+      
         <button type="submit" id="submitBtn" style="width: 100%; background: linear-gradient(135deg, #6B21A8, #9333EA); color: white; border: none; padding: 1.1rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 1rem;">Send Quote Request →</button>
         <div id="successMsg" style="display:none; color: #34D399; text-align: center; margin-top: 1.5rem; font-weight: 600;">✅ Quote Request Sent! We'll be in touch soon.</div>
       </form>
@@ -276,6 +281,13 @@
     nav.style.background = window.scrollY > 40 ? 'rgba(10,10,15,0.98)' : 'rgba(10,10,15,0.92)';
   });
   async function submitCardForm(e) {
+
+    // 1. Check if CAPTCHA is ticked
+    const captchaResponse = grecaptcha.getResponse();
+    if (captchaResponse.length === 0) {
+      alert("Please verify that you are not a robot.");
+      return;
+    }
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
     btn.textContent = 'Sending...'; btn.disabled = true;
