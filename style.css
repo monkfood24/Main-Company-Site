@@ -473,3 +473,44 @@
   align-items: center;
   justify-content: center;
 }
+
+
+/* ── HOME PAGE CONTACT LAYOUT FIX ── */
+.contact-container {
+  display: flex;
+  flex-direction: row; /* Horizontal on Web */
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+.contact-info {
+  flex: 1; /* Left Half */
+}
+
+.contact-form {
+  flex: 1.2; /* Right Half */
+  background: rgba(255, 255, 255, 0.02);
+  padding: 2.5rem;
+  border-radius: 15px;
+  border: 1px solid rgba(201, 168, 76, 0.1);
+}
+
+/* 📱 MOBILE FIX ── */
+@media (max-width: 992px) {
+  .contact-container {
+    flex-direction: column !important; /* Stacks vertically */
+    gap: 3rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr !important; /* Single column inputs */
+    gap: 1rem !important;
+  }
+
+  .contact-form {
+    width: 100%;
+    padding: 1.5rem !important;
+  }
+}
