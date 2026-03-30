@@ -282,6 +282,7 @@
     nav.style.background = window.scrollY > 40 ? 'rgba(10,10,15,0.98)' : 'rgba(10,10,15,0.92)';
   });
   async function submitCardForm(e) {
+    e.preventDefault();
 
     // 1. Check if CAPTCHA is ticked
     const captchaResponse = grecaptcha.getResponse();
@@ -289,7 +290,7 @@
       alert("Please verify that you are not a robot.");
       return;
     }
-    e.preventDefault();
+    
     const btn = document.getElementById('submitBtn');
     btn.textContent = 'Sending...'; btn.disabled = true;
     const payload = {
