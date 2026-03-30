@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
@@ -227,6 +228,9 @@
           <label>Message</label>
           <textarea id="fmessage" placeholder="Tell us about your restaurant and what you're looking for..."></textarea>
         </div>
+        <div style="margin-bottom: 1.5rem;">
+            <div class="g-recaptcha" data-sitekey="6Lf0aJ4sAAAAAM8bgZxzCzH8qaiUtuH6wWCkWQtY"></div>
+        </div>
         <button type="submit" class="form-submit" id="submitBtn">Send Enquiry →</button>
         <div class="success-msg" id="successMsg">
           ✅ Thank you! Your enquiry has been submitted. We'll be in touch within 24 hours.
@@ -359,6 +363,50 @@
     }
     btn.textContent = 'Send Enquiry →'; btn.disabled = false;
   }
+
+
+  async function submitForm(e) {
+  e.preventDefault();
+
+  // 1. Check if CAPTCHA is ticked
+  const captchaResponse = grecaptcha.getResponse();
+  if (captchaResponse.length === 0) {
+    alert("Please verify that you are not a robot.");
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending...'; 
+  btn.disabled = true;
+
+  const payload = {
+    name: document.getElementById('fname').value,
+    email: document.getElementById('femail').value,
+    phone: document.getElementById('fphone').value,
+    service: document.getElementById('fservice').value,
+    message: document.getElementById('fmessage').value,
+    timestamp: new Date().toISOString()
+  };
+
+  const GOOGLE_SCRIPT_URL = 'YOUR_GENERAL_SCRIPT_URL';
+
+  try {
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify(payload)
+    });
+    
+    document.getElementById('contactForm').reset();
+    grecaptcha.reset(); // This resets the captcha for the next use
+    document.getElementById('successMsg').classList.add('show');
+  } catch(err) {
+    document.getElementById('successMsg').classList.add('show');
+  }
+  
+  btn.textContent = 'Send Enquiry →'; 
+  btn.disabled = false;
+}
 
   /* ── SCROLL REVEAL ── */
   const observer = new IntersectionObserver((entries) => {
