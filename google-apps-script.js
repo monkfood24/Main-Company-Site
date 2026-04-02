@@ -7,7 +7,7 @@
 // 1. Go to: https://sheets.google.com → Create a new spreadsheet
 //    Name it: "JP Nadar Enquiries"
 //    Add these headers in Row 1:
-//    Timestamp | Name | Email | Phone | Service | Message
+//    Timestamp | Name | Email | Restaurant | Postcode | Phone | Service | Message
 //
 // 2. Go to: https://script.google.com → New Project
 //    Paste ALL the code below
@@ -37,6 +37,8 @@ function doPost(e) {
       data = {
         name: e.parameter.name || '',
         email: e.parameter.email || '',
+        restaurant: e.parameter.restaurant || '',
+        postcode: e.parameter.postcode || '',
         phone: e.parameter.phone || '',
         service: e.parameter.service || '',
         message: e.parameter.message || '',
@@ -48,6 +50,8 @@ function doPost(e) {
       new Date(data.timestamp || new Date()),
       data.name || '',
       data.email || '',
+      data.restaurant || '',
+      data.postcode || '',
       data.phone || '',
       data.service || '',
       data.message || ''
@@ -82,6 +86,8 @@ New enquiry received on J.P. Nadar website:
 
 Name: ${data.name}
 Email: ${data.email}
+Restaurant: ${data.restaurant}
+Postcode: ${data.postcode}
 Phone: ${data.phone}
 Service: ${data.service}
 Message: ${data.message}
