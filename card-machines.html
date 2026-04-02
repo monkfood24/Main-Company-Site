@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style-sub.css" />
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   
   <style>
     /* ── DYNAMIC FORM LAYOUT ENGINE ── */
@@ -230,6 +231,10 @@
           <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #9999AA;">Problem with current provider?</label>
           <textarea id="fproblem" placeholder="High rates, slow terminal..." style="width: 100%; padding: 0.85rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; min-height: 80px;"></textarea>
         </div>
+        <div class="form-group" style="margin-bottom: 2rem; display: flex; flex-direction: column; align-items: center;">
+          <div class="g-recaptcha" data-sitekey="6Lc6bJ4sAAAAAC_Ll696ZE8kd_dvSsYHttG_4pbj"></div>
+          <p id="recaptcha-error" class="error-msg" style="width: 100%; text-align: left;"></p>
+        </div>
         <button type="submit" id="submitBtn" style="width: 100%; background: linear-gradient(135deg, #6B21A8, #9333EA); color: white; border: none; padding: 1.1rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 1rem;">Send Quote Request →</button>
         <div id="successMsg" style="display:none; color: #34D399; text-align: center; margin-top: 1.5rem; font-weight: 600;">✅ Quote Request Sent! We'll be in touch soon.</div>
       </form>
@@ -322,6 +327,15 @@
     if (!document.getElementById('fturnover').value.trim()) showError('fturnover', 'Please enter your monthly turnover.');
     if (!document.getElementById('ftransactions').value.trim()) showError('ftransactions', 'Please enter your monthly transactions.');
 
+    if (typeof grecaptcha !== 'undefined') {
+      const captchaResponse = grecaptcha.getResponse();
+      if (captchaResponse.length === 0) {
+        const errEl = document.getElementById('recaptcha-error');
+        if (errEl) { errEl.textContent = 'Please verify that you are not a robot.'; errEl.style.display = 'block'; }
+        hasError = true;
+      }
+    }
+
     if (hasError) {
       if (firstErrorId) {
         document.getElementById(firstErrorId).scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -345,9 +359,11 @@
     try {
       await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
       document.getElementById('cardMachineForm').reset();
+      if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
       document.getElementById('successMsg').style.display = 'block';
     } catch(err) {
       document.getElementById('cardMachineForm').reset();
+      if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
       document.getElementById('successMsg').style.display = 'block';
     }
     btn.textContent = 'Send Quote Request →'; btn.disabled = false;
