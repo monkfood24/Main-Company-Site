@@ -64,6 +64,14 @@
       border-color: #6B21A8 !important;
       background: rgba(255,255,255,0.08) !important;
     }
+
+    .error-msg {
+      color: #ff4d4f;
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      display: none;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -178,25 +186,29 @@
     </div>
 
     <div class="contact-form-container">
-      <form id="cardMachineForm" onsubmit="submitCardForm(event)">
+      <form id="cardMachineForm" onsubmit="submitCardForm(event)" novalidate>
         <div class="form-row">
           <div class="form-group">
             <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #9999AA;">Full Name *</label>
             <input type="text" id="fname" placeholder="John Smith" required style="width: 100%; padding: 0.85rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;">
+            <p id="fname-error" class="error-msg"></p>
           </div>
           <div class="form-group">
             <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #9999AA;">Business Name *</label>
             <input type="text" id="fbizname" placeholder="Restaurant Name" required style="width: 100%; padding: 0.85rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;">
+            <p id="fbizname-error" class="error-msg"></p>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #9999AA;">Email Address *</label>
             <input type="email" id="femail" required style="width: 100%; padding: 0.85rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;">
+            <p id="femail-error" class="error-msg"></p>
           </div>
           <div class="form-group">
             <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #9999AA;">Phone Number *</label>
             <input type="tel" id="fphone" placeholder="+44" oninput="this.value = this.value.replace(/[^0-9+]/g, '')" required style="width: 100%; padding: 0.85rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;">
+            <p id="fphone-error" class="error-msg"></p>
           </div>
         </div>
         <div class="form-row">
@@ -206,10 +218,12 @@
                <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #C9A84C; pointer-events: none; font-weight: bold;">£</span>
                <input type="text" id="fturnover" placeholder="10,000" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required style="width: 100%; padding: 0.85rem 0.85rem 0.85rem 32px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;">
             </div>
+            <p id="fturnover-error" class="error-msg"></p>
           </div>
           <div class="form-group">
             <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #9999AA;">Monthly Transactions *</label>
             <input type="text" id="ftransactions" placeholder="e.g. 500" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required style="width: 100%; padding: 0.85rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;">
+            <p id="ftransactions-error" class="error-msg"></p>
           </div>
         </div>
         <div class="form-group" style="margin-bottom: 2rem;">
@@ -271,14 +285,52 @@
 
 <script>
   function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  document.querySelectorAll('#mobileMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.remove('open');
+    });
+  });
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
     nav.style.background = window.scrollY > 40 ? 'rgba(10,10,15,0.98)' : 'rgba(10,10,15,0.92)';
   });
+
   async function submitCardForm(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
     btn.textContent = 'Sending...'; btn.disabled = true;
+
+    document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.form-group input').forEach(el => el.style.borderColor = 'rgba(255,255,255,0.1)');
+
+    let hasError = false;
+    let firstErrorId = null;
+    const showError = (id, msg) => {
+      const input = document.getElementById(id);
+      const errEl = document.getElementById(id + '-error');
+      if (input) input.style.borderColor = '#ff4d4f';
+      if (errEl) { errEl.textContent = msg; errEl.style.display = 'block'; }
+      hasError = true;
+      if (!firstErrorId) firstErrorId = id;
+    };
+
+    if (!document.getElementById('fname').value.trim()) showError('fname', 'Please enter your full name.');
+    if (!document.getElementById('fbizname').value.trim()) showError('fbizname', 'Please enter your business name.');
+    const emailVal = document.getElementById('femail').value.trim();
+    if (!emailVal || !emailVal.includes('@')) showError('femail', 'Please enter a valid email address.');
+    if (!document.getElementById('fphone').value.trim()) showError('fphone', 'Please enter your phone number.');
+    if (!document.getElementById('fturnover').value.trim()) showError('fturnover', 'Please enter your monthly turnover.');
+    if (!document.getElementById('ftransactions').value.trim()) showError('ftransactions', 'Please enter your monthly transactions.');
+
+    if (hasError) {
+      if (firstErrorId) {
+        document.getElementById(firstErrorId).scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      btn.textContent = 'Send Quote Request →';
+      btn.disabled = false;
+      return;
+    }
+
     const payload = {
       name: document.getElementById('fname').value,
       business: document.getElementById('fbizname').value,
@@ -289,11 +341,13 @@
       problem: document.getElementById('fproblem').value
     };
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzg3uFdO-R3r-8f7fywPEAGd0K-StW3FiF7oVohpaaRU_tKaJkg5oSuwRqMRqwHUNXBJA/exec';
+    
     try {
       await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
       document.getElementById('cardMachineForm').reset();
       document.getElementById('successMsg').style.display = 'block';
     } catch(err) {
+      document.getElementById('cardMachineForm').reset();
       document.getElementById('successMsg').style.display = 'block';
     }
     btn.textContent = 'Send Quote Request →'; btn.disabled = false;
