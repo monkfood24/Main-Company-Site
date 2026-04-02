@@ -316,7 +316,7 @@
               <div style="position: relative;">
                 <span
                   style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #C9A84C; pointer-events: none; font-weight: bold;">£</span>
-                <input type="text" inputmode="numeric" id="fturnover" placeholder="10,000"
+                <input type="text" inputmode="numeric" pattern="[0-9]*" id="fturnover" placeholder="10,000"
                   oninput="this.value = this.value.replace(/[^0-9]/g, '')" required
                   style="width: 100%; padding: 0.85rem 0.85rem 0.85rem 32px; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; color: #111827;">
               </div>
@@ -325,7 +325,7 @@
             <div class="form-group">
               <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #6B7280;">Monthly
                 Transactions *</label>
-              <input type="text" inputmode="numeric" id="ftransactions" placeholder="e.g. 500"
+              <input type="text" inputmode="numeric" pattern="[0-9]*" id="ftransactions" placeholder="e.g. 500"
                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" required
                 style="width: 100%; padding: 0.85rem; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; color: #111827;">
               <p id="ftransactions-error" class="error-msg"></p>
