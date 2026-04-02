@@ -338,9 +338,9 @@
               style="width: 100%; padding: 0.85rem; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; color: #111827; min-height: 80px;"></textarea>
           </div>
           <div class="form-group"
-            style="margin-bottom: 2rem; display: flex; flex-direction: column; align-items: center;">
-            <div class="g-recaptcha" data-sitekey="6Le4l6MsAAAAAFqZNDXZJ9kFDwoj0NK6xSuqjnqO"></div>
-            <p id="recaptcha-error" class="error-msg" style="width: 100%; text-align: left;"></p>
+            style="margin-bottom: 2rem; display: flex; flex-direction: column; align-items: left;">
+            <div class="g-recaptcha" data-sitekey="6Le4l6MsAAAAAFqZNDXZJ9kFDwoj0NK6xSuqjnqO" data-size="invisible"
+              data-badge="inline" data-callback="onCaptchaResolved"></div>
           </div>
           <button type="submit" id="submitBtn"
             style="width: 100%; background: linear-gradient(135deg, #6B21A8, #9333EA); color: white; border: none; padding: 1.1rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 1rem;">Send
@@ -401,6 +401,10 @@
   </footer>
 
   <script>
+    window.onCaptchaResolved = function (token) {
+      if (window.resolveCaptcha) window.resolveCaptcha(token);
+    };
+
     function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
     document.querySelectorAll('#mobileMenu a').forEach(link => {
       link.addEventListener('click', () => {
@@ -439,15 +443,6 @@
       if (!document.getElementById('fturnover').value.trim()) showError('fturnover', 'Please enter your monthly turnover.');
       if (!document.getElementById('ftransactions').value.trim()) showError('ftransactions', 'Please enter your monthly transactions.');
 
-      if (typeof grecaptcha !== 'undefined') {
-        const captchaResponse = grecaptcha.getResponse();
-        if (captchaResponse.length === 0) {
-          const errEl = document.getElementById('recaptcha-error');
-          if (errEl) { errEl.textContent = 'Please verify that you are not a robot.'; errEl.style.display = 'block'; }
-          hasError = true;
-        }
-      }
-
       if (hasError) {
         if (firstErrorId) {
           document.getElementById(firstErrorId).scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -455,6 +450,15 @@
         btn.textContent = 'Send Quote Request →';
         btn.disabled = false;
         return;
+      }
+
+      if (typeof grecaptcha !== 'undefined') {
+        try {
+          await new Promise((resolve) => {
+            window.resolveCaptcha = resolve;
+            grecaptcha.execute();
+          });
+        } catch (err) { }
       }
 
       const payload = {

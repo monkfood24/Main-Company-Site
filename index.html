@@ -315,10 +315,12 @@
             <textarea id="fmessage" placeholder="Tell us about your restaurant..."></textarea>
           </div>
 
-          <div class="form-group" style="margin-bottom: 2rem; display: flex; flex-direction: column; align-items: center;">
-            
-          
-          <button class="g-recaptcha" data-sitekey="6Le4l6MsAAAAAFqZNDXZJ9kFDwoj0NK6xSuqjnqO" data-callback="onSubmit" data-action="submit"type="submit" class="form-submit" id="submitBtn">Send Enquiry →</button>
+          <div class="form-group"
+            style="margin-bottom: 2rem; display: flex; flex-direction: column; align-items: left;">
+            <div class="g-recaptcha" data-sitekey="6Le4l6MsAAAAAFqZNDXZJ9kFDwoj0NK6xSuqjnqO" data-size="invisible"
+              data-badge="inline" data-callback="onCaptchaResolved"></div>
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">Send Enquiry →</button>
 
           <div class="success-msg" id="successMsg">
             ✅ Thank you! Your enquiry has been submitted. We Will get back to you in next 24 Hours.
@@ -380,6 +382,10 @@
   </footer>
 
   <script>
+    window.onCaptchaResolved = function (token) {
+      if (window.resolveCaptcha) window.resolveCaptcha(token);
+    };
+
     /* ── NAV SCROLL ── */
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').style.background =
@@ -462,15 +468,6 @@
         if (!firstErrorId) firstErrorId = 'fservice-group';
       }
 
-      if (typeof grecaptcha !== 'undefined') {
-        const captchaResponse = grecaptcha.getResponse();
-        if (captchaResponse.length === 0) {
-          const errEl = document.getElementById('recaptcha-error');
-          if (errEl) { errEl.textContent = 'Please verify that you are not a robot.'; errEl.style.display = 'block'; }
-          hasError = true;
-        }
-      }
-
       if (hasError) {
         if (firstErrorId) {
           document.getElementById(firstErrorId).scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -478,6 +475,15 @@
         btn.textContent = 'Send Enquiry →';
         btn.disabled = false;
         return;
+      }
+
+      if (typeof grecaptcha !== 'undefined') {
+        try {
+          await new Promise((resolve) => {
+            window.resolveCaptcha = resolve;
+            grecaptcha.execute();
+          });
+        } catch (err) { }
       }
 
       const selectedServices = selectedCheckboxes.map(cb => cb.value).join(', ');
