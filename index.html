@@ -40,7 +40,6 @@
           <a href="digital-marketing.html">📣 Digital Marketing</a>
         </div>
       </li>
-      <li><a href="#clients">Clients</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#contact" class="nav-cta">Get Started</a></li>
     </ul>
@@ -61,7 +60,6 @@
     <a href="card-machines.html" class="mobile-sub-link">💳 Card Machines</a>
     <a href="digital-marketing.html" class="mobile-sub-link">📣 Digital Marketing</a>
 
-    <a href="#clients">Clients</a>
     <a href="#contact">Contact</a>
   </div>
 
@@ -150,60 +148,6 @@
         <span class="learn-more">Learn More →</span>
       </a>
     </div>
-    </div>
-  </section>
-
-  <!-- ── CLIENTS ── -->
-  <section class="clients" id="clients">
-    <div class="clients-inner">
-      <div class="text-center">
-        <div class="section-label">Our Clients</div>
-        <h2 class="section-title">Trusted by Leading Restaurants</h2>
-        <p class="section-sub">From local gems to national chains — restaurants of all sizes trust J.P. Nadar.</p>
-      </div>
-      <div class="carousel-track-wrap">
-        <div class="carousel-track" id="clientTrack">
-          <!-- Cards duplicated in JS -->
-        </div>
-      </div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p>J.P. Nadar transformed our entire ordering process. Our table turnover improved by 35% and staff love the
-            new POS system.</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">AK</div>
-            <div>
-              <div class="author-name">Ahmed Khan</div>
-              <div class="author-role">Owner, Spice Garden</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p>The online ordering system they set up for us increased our takeaway revenue by 60% in just three months.
-            Incredible results!</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">MP</div>
-            <div>
-              <div class="author-name">Maria Patel</div>
-              <div class="author-role">Manager, The Curry House</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p>Their digital marketing team doubled our Instagram following and we now get bookings directly through our
-            website. Phenomenal service.</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">JL</div>
-            <div>
-              <div class="author-name">James Lee</div>
-              <div class="author-role">Director, Lotus Kitchen</div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -352,7 +296,6 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#clients">Clients</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -404,34 +347,7 @@
       });
     });
 
-    /* ── CLIENT CAROUSEL ── */
-    const clients = [
-      { name: 'Zeika By Chef Hakeem', type: 'Indian Restaurant', img: 'Client Logo/Zeika by Chef Hakeem.webp', url: '#', color: '#7C3AED' },
-      { name: 'HOTSPOT', type: 'Takeaway', img: 'Client Logo/Hotspot logo.jpg', url: '#', color: '#9A7A2E' },
-    ];
-
-    const track = document.getElementById('clientTrack');
-
-    // 1. This defines HOW to build the card
-    const buildCards = (arr) => arr.map(c => {
-      const logoContent = c.img
-        ? `<img src="${c.img}" alt="${c.name}" class="client-img">`
-        : c.initial;
-
-      return `
-      <a class="client-card" href="${c.url}" target="_blank" rel="noopener">
-        <div class="client-logo" style="background: ${c.img ? 'transparent' : 'linear-gradient(135deg,' + c.color + ',#C9A84C)'}">
-              ${logoContent}
-        </div>
-        <div class="client-name">${c.name}</div>
-        <div class="client-type">${c.type}</div>
-          </a>`;
-    }).join('');
-
-    // 2. THIS IS THE MISSING PART: Actually putting the cards into the HTML
-    // We repeat it twice so the loop is seamless
-    // Repeat the 2 clients 4 times (making 8 boxes total) to fill the screen width
-    track.innerHTML = buildCards(clients).repeat(4);
+    
 
     /* ── FORM SUBMISSION TO GOOGLE SHEETS ── */
     async function submitForm(e) {
