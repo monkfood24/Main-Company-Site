@@ -335,6 +335,15 @@
             <textarea id="fproblem" placeholder="High rates, slow terminal..."
               style="width: 100%; padding: 0.85rem; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; color: #111827; min-height: 80px;"></textarea>
           </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 0.85rem; color: var(--text-muted);">
+              <input type="checkbox" id="fgdpr" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--purple-light); box-shadow: none;" required />
+              <span>I consent to having this website store my submitted information so they can respond to my enquiry. See our <a href="privacy-policy.html" style="color: var(--gold); text-decoration: underline;">Privacy Policy</a>. *</span>
+            </label>
+            <p id="fgdpr-error" class="error-msg">You must consent to the data policy before submitting.</p>
+          </div>
+
           <div class="form-group"
             style="margin-bottom: 2rem; display: flex; flex-direction: column; align-items: left;">
             <div class="g-recaptcha" data-sitekey="6Le4l6MsAAAAAFqZNDXZJ9kFDwoj0NK6xSuqjnqO" data-size="invisible"
@@ -369,7 +378,6 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#clients">Clients</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -394,6 +402,7 @@
     </div>
     <div class="footer-bottom">
       <p>© 2025 <span class="gold-line">J.P. Nadar</span>. All rights reserved.</p>
+      <p><a href="privacy-policy.html" style="color: var(--text-muted); text-decoration: underline;">Privacy Policy</a></p>
       <p>Designed & Built with ♥ for Restaurants</p>
     </div>
   </footer>
@@ -440,6 +449,7 @@
       if (!document.getElementById('fphone').value.trim()) showError('fphone', 'Please enter your phone number.');
       if (!document.getElementById('fturnover').value.trim()) showError('fturnover', 'Please enter your monthly turnover.');
       if (!document.getElementById('ftransactions').value.trim()) showError('ftransactions', 'Please enter your monthly transactions.');
+      if (!document.getElementById('fgdpr').checked) showError('fgdpr', 'You must consent to the data policy before submitting.');
 
       if (hasError) {
         if (firstErrorId) {
