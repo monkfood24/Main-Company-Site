@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Card Machines | J.P. Nadar</title>
+  <meta name="description"
+    content="Integrated card payment terminals for restaurants — contactless, chip & pin, and fully synced with your POS system." />
+  <meta name="keywords"
+    content="restaurant card machine, payment terminal restaurant UK, contactless payment restaurant" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style-sub.css" />
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <style>
+    /* ── DYNAMIC FORM LAYOUT ENGINE ── */
+    .contact-container {
+      display: flex;
+      flex-direction: row;
+      gap: 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: flex-start;
+    }
+
+    .contact-info {
+      flex: 1;
+    }
+
+    .contact-form-container {
+      flex: 1.2;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    /* 📱 MOBILE RESPONSIVE LOGIC ── */
+    @media (max-width: 992px) {
+      .contact-container {
+        flex-direction: column;
+        gap: 3rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .contact-form-container {
+        padding: 1.5rem;
+        width: 100%;
+      }
+
+      .section-title {
+        font-size: 2.2rem !important;
+        line-height: 1.2;
+      }
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #6D28D9 !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+    }
+
+    .error-msg {
+      color: #ff4d4f;
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      display: none;
+      font-weight: 500;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav id="navbar">
+    <a href="index.html" class="logo">J.P. Nadar</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Services ▾</a>
+        <div class="dropdown-menu">
+          <a href="Business-solutions.html">Business Solutions</a>
+          <a href="systems.html">Systems</a>
+          <a href="website.html">Website Builder</a>
+          <a href="payment-solutions.html">Payment Solutions</a>
+          <a href="digital-marketing.html">Digital Marketing</a>
+        </div>
+      </li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="nav-cta">Get Started</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <div
+      style="padding: 15px 0 5px 0; color: var(--gold); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+      Our Services</div>
+    <a href="Business-solutions.html" class="mobile-sub-link">🍽️ Business Solutions</a>
+    <a href="systems.html" class="mobile-sub-link">🖥️ POS Systems</a>
+    <a href="website.html" class="mobile-sub-link">📱 Online Ordering</a>
+    <a href="payment-solutions.html" class="mobile-sub-link" style="color: var(--gold) !important;">💳 Payment Solutions</a>
+    <a href="digital-marketing.html" class="mobile-sub-link">📣 Digital Marketing</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-content">
+      <div class="breadcrumb"><a href="index.html">Home</a> › <span>Card Machines</span></div>
+      <div class="service-tag">Card Machines</div>
+      <h1>Seamless Card Payments Integrated with Your POS</h1>
+      <p class="hero-sub">Accept every card, every time — contactless, chip & pin, Apple Pay, and Google Pay. Our
+        terminals connect directly to your POS for a frictionless payment experience.</p>
+      <a href="#contact" class="btn-primary">Get a Terminal</a>
+      <a href="#contact" class="btn-outline">Contact Us</a>
+    </div>
+  </section>
+
+  <section class="desc">
+    <div class="desc-grid">
+      <div class="desc-text">
+        <div class="section-label">About Card Machines</div>
+        <h2 class="section-title">Payments That Never Let You Down</h2>
+        <p>A failed payment at checkout is one of the most frustrating experiences for both customers and staff. J.P.
+          Nadar's card machines are built for high-volume restaurant environments — fast, reliable, and always
+          connected.</p>
+        <p>Our terminals integrate seamlessly with your J.P. Nadar POS system. When a customer pays, the amount is
+          transferred automatically from the POS to the card terminal — no manual entry, no errors.</p>
+        <div class="highlight-box">
+          <p>"We used to have reconciliation issues every week. Since switching to J.P. Nadar card machines, our
+            end-of-day closeouts take 5 minutes instead of 45." — Owner, The Grill House</p>
+        </div>
+      </div>
+      <div class="desc-visual">
+        <div class="metric-item">
+          <div class="metric-icon">⚡</div>
+          <div>
+            <div class="metric-label">Transaction Speed</div>
+            <div class="metric-val">&lt;3 sec</div>
+          </div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-icon">🔒</div>
+          <div>
+            <div class="metric-label">Security Standard</div>
+            <div class="metric-val">PCI DSS</div>
+          </div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-icon">💳</div>
+          <div>
+            <div class="metric-label">Payment Methods</div>
+            <div class="metric-val">All</div>
+          </div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-icon">🛜</div>
+          <div>
+            <div class="metric-label">Connectivity</div>
+            <div class="metric-val">4G + WiFi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="text-center">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Everything in One Terminal</h2>
+      <p class="section-sub">Modern payment terminals built for the demands of busy restaurant service.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📡</div>
+        <h3>Contactless Payments</h3>
+        <p>Apple Pay, Google Pay, and all contactless cards — tap and done in under 3 seconds.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>Native POS Integration</h3>
+        <p>Amounts transfer automatically. No manual entry — ever.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛜</div>
+        <h3>4G Backup Connectivity</h3>
+        <p>If WiFi drops, it switches to 4G automatically. You'll never miss a payment.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Tipping Options</h3>
+        <p>Built-in tip prompts at checkout — properly configured for UK restaurants.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-us">
+    <div class="text-center">
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">Why Restaurants Choose Our Terminals</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-check">✓</div>
+        <div>
+          <h4>Competitive Transaction Rates</h4>
+          <p>Processing rates among the lowest in the UK. We'll beat your current rate.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-check">✓</div>
+        <div>
+          <h4>Next-Day Settlements</h4>
+          <p>Money lands in your bank account next working day.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-check">✓</div>
+        <div>
+          <h4>Same-Day Replacements</h4>
+          <p>Terminal fault? We dispatch a replacement same day.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-check">✓</div>
+        <div>
+          <h4>24/7 Technical Support</h4>
+          <p>Support team available around the clock, every day of the year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" style="background: #F3F4F6; padding: 100px 5%;">
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="section-label">Get a Quote</div>
+        <h2 class="section-title">Save on Every Transaction</h2>
+        <p style="color: #6B7280; line-height: 1.8; margin-bottom: 2rem; font-size: 1.1rem;">
+          Fill out the details of your current setup and we will provide a custom rate comparison to show you exactly
+          how much you can save.
+        </p>
+        <div
+          style="display: flex; gap: 1rem; align-items: center; background: rgba(201,168,76,0.05); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #C9A84C;">
+          <div style="font-size: 1.5rem;">📊</div>
+          <div>
+            <div style="font-size: 0.75rem; color: #C9A84C; font-weight: 700; text-transform: uppercase;">Rate Guarantee
+            </div>
+            <div style="font-weight: 600; color: #111827;">We beat any written quote.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-container">
+        <form id="cardMachineForm" onsubmit="submitCardForm(event)" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #6B7280;">Full Name
+                *</label>
+              <input type="text" id="fname" placeholder="John Smith" required
+                style="width: 100%; padding: 0.85rem; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; color: #111827;">
+              <p id="fname-error" class="error-msg"></p>
+            </div>
+            <div class="form-group">
+              <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #6B7280;">Business Name
+                *</label>
+              <input type="text" id="fbizname" placeholder="e.g. The Indian Restaurants" required
+                style="width: 100%; padding: 0.85rem; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; color: #111827;">
+              <p id="fbizname-error" class="error-msg"></p>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #6B7280;">Email Address
+                *</label>
+              <input type="email" id="femail" placeholder="john@gmail.com" required
+                style="width: 100%; padding: 0.85rem; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; color: #111827;">
+              <p id="femail-error" class="error-msg"></p>
+            </div>
+            <div class="form-group">
+              <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #6B7280;">Phone Number
+                *</label>
+              <input type="tel" id="fphone" placeholder="0 7455 809123"
+                oninput="this.value = this.value.replace(/[^0-9+]/g, '')" required
+                style="width: 100%; padding: 0.85rem; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; color: #111827;">
+              <p id="fphone-error" class="error-msg"></p>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #6B7280;">Monthly Turnover
+                (£) *</label>
+              <div style="position: relative;">
+                <span
+                  style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #C9A84C; pointer-events: none; font-weight: bold;">£</span>
+                <input type="text" inputmode="numeric" pattern="[0-9]*" id="fturnover" placeholder="10,000"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '')" required
+                  style="width: 100%; padding: 0.85rem 0.85rem 0.85rem 32px; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; color: #111827;">
+              </div>
+              <p id="fturnover-error" class="error-msg"></p>
+            </div>
+            <div class="form-group">
+              <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #6B7280;">Monthly
+                Transactions *</label>
+              <input type="text" inputmode="numeric" pattern="[0-9]*" id="ftransactions" placeholder="e.g. 500"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required
+                style="width: 100%; padding: 0.85rem; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; color: #111827;">
+              <p id="ftransactions-error" class="error-msg"></p>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 2rem;">
+            <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; color: #6B7280;">Problem with
+              current provider?</label>
+            <textarea id="fproblem" placeholder="High rates, slow terminal..."
+              style="width: 100%; padding: 0.85rem; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; color: #111827; min-height: 80px;"></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 0.85rem; color: var(--text-muted);">
+              <input type="checkbox" id="fgdpr" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--purple-light); box-shadow: none;" required />
+              <span>I consent to having this website store my submitted information so they can respond to my enquiry. See our <a href="privacy-policy.html" style="color: var(--gold); text-decoration: underline;">Privacy Policy</a>. *</span>
+            </label>
+            <p id="fgdpr-error" class="error-msg">You must consent to the data policy before submitting.</p>
+          </div>
+
+          <div class="form-group"
+            style="margin-bottom: 2rem; display: flex; flex-direction: column; align-items: left;">
+            <div class="g-recaptcha" data-sitekey="6Le4l6MsAAAAAFqZNDXZJ9kFDwoj0NK6xSuqjnqO" data-size="invisible"
+              data-badge="inline" data-callback="onCaptchaResolved"></div>
+          </div>
+          <button type="submit" id="submitBtn"
+            style="width: 100%; background: linear-gradient(135deg, #6B21A8, #9333EA); color: white; border: none; padding: 1.1rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 1rem;">Send
+            Quote Request →</button>
+          <div id="successMsg"
+            style="display:none; color: #34D399; text-align: center; margin-top: 1.5rem; font-weight: 600;">✅ Quote
+            Request Sent! We'll be in touch soon.</div>
+          <p style="font-size:0.72rem;color:var(--text-muted);margin-top:0.75rem;text-align:center;">Your data is stored
+            securely in Google Sheets.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">J.P. Nadar</a>
+        <p>Complete digital solutions for Businesss — helping businesses thrive with technology, strategy, and
+          support.</p>
+        <div class="footer-social">
+          <a class="social-icon" href="#" aria-label="Facebook">f</a>
+          <a class="social-icon" href="#" aria-label="Instagram">ig</a>
+          <a class="social-icon" href="#" aria-label="Twitter">𝕏</a>
+          <a class="social-icon" href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="Business-solutions.html">Business Solutions</a></li>
+          <li><a href="systems.html">Systems</a></li>
+          <li><a href="website.html">Website Builder</a></li>
+          <li><a href="payment-solutions.html">Payment Solutions</a></li>
+          <li><a href="digital-marketing.html">Digital Marketing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+          <li><span>📧</span><span>info@jpnadar.co.uk</span></li>
+          <li><span>📞</span><span>+44 (0)330 043 5064</span></li>
+          <li><span>📍</span><span>Office 9500ee, 3 Fitzroy Place, Area 1/1 Fitzroy Place, Sauchiehall Street, Glasgow, Scotland, G3 7RH
+</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 <span class="gold-line">J.P. Nadar</span>. All rights reserved.</p>
+      <p><a href="privacy-policy.html" style="color: var(--text-muted); text-decoration: underline;">Privacy Policy</a></p>
+      <p>Designed & Built with ♥ for Businesss</p>
+    </div>
+  </footer>
+
+  <script>
+    window.onCaptchaResolved = function (token) {
+      if (window.resolveCaptcha) window.resolveCaptcha(token);
+    };
+
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.remove('open');
+      });
+    });
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      nav.style.background = window.scrollY > 40 ? 'rgba(255,255,255,0.98)' : 'rgba(255,255,255,0.92)';
+    });
+
+    async function submitCardForm(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = 'Sending...'; btn.disabled = true;
+
+      document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.form-group input').forEach(el => el.style.borderColor = 'rgba(255,255,255,0.1)');
+
+      let hasError = false;
+      let firstErrorId = null;
+      const showError = (id, msg) => {
+        const input = document.getElementById(id);
+        const errEl = document.getElementById(id + '-error');
+        if (input) input.style.borderColor = '#ff4d4f';
+        if (errEl) { errEl.textContent = msg; errEl.style.display = 'block'; }
+        hasError = true;
+        if (!firstErrorId) firstErrorId = id;
+      };
+
+      if (!document.getElementById('fname').value.trim()) showError('fname', 'Please enter your full name.');
+      if (!document.getElementById('fbizname').value.trim()) showError('fbizname', 'Please enter your business name.');
+      const emailVal = document.getElementById('femail').value.trim();
+      if (!emailVal || !emailVal.includes('@')) showError('femail', 'Please enter a valid email address.');
+      if (!document.getElementById('fphone').value.trim()) showError('fphone', 'Please enter your phone number.');
+      if (!document.getElementById('fturnover').value.trim()) showError('fturnover', 'Please enter your monthly turnover.');
+      if (!document.getElementById('ftransactions').value.trim()) showError('ftransactions', 'Please enter your monthly transactions.');
+      if (!document.getElementById('fgdpr').checked) showError('fgdpr', 'You must consent to the data policy before submitting.');
+
+      if (hasError) {
+        if (firstErrorId) {
+          document.getElementById(firstErrorId).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        btn.textContent = 'Send Quote Request →';
+        btn.disabled = false;
+        return;
+      }
+
+      let captchaToken = '';
+      if (typeof grecaptcha !== 'undefined') {
+        try {
+          captchaToken = await new Promise((resolve) => {
+            window.resolveCaptcha = resolve;
+            grecaptcha.execute();
+          });
+        } catch (err) { }
+      }
+
+      const payload = {
+        name: document.getElementById('fname').value,
+        business: document.getElementById('fbizname').value,
+        email: document.getElementById('femail').value,
+        phone: document.getElementById('fphone').value,
+        turnover: "£" + document.getElementById('fturnover').value,
+        transactions: document.getElementById('ftransactions').value,
+        problem: document.getElementById('fproblem').value,
+        recaptcha: captchaToken
+      };
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzg3uFdO-R3r-8f7fywPEAGd0K-StW3FiF7oVohpaaRU_tKaJkg5oSuwRqMRqwHUNXBJA/exec';
+
+      try {
+        await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+        document.getElementById('cardMachineForm').reset();
+        if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+        document.getElementById('successMsg').style.display = 'block';
+      } catch (err) {
+        document.getElementById('cardMachineForm').reset();
+        if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+        document.getElementById('successMsg').style.display = 'block';
+      }
+      btn.textContent = 'Send Quote Request →'; btn.disabled = false;
+    }
+  </script>
+</body>
+
+</html>
