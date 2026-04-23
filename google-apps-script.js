@@ -38,7 +38,7 @@ function doPost(e) {
       data = {
         name: e.parameter.name || '',
         email: e.parameter.email || '',
-        restaurant: e.parameter.restaurant || '',
+        restaurant: e.parameter.restaurant || e.parameter.Business || e.parameter.business || '',
         postcode: e.parameter.postcode || '',
         phone: e.parameter.phone || '',
         service: e.parameter.service || '',
@@ -70,7 +70,7 @@ function doPost(e) {
       new Date(data.timestamp || new Date()),
       data.name || '',
       data.email || '',
-      data.restaurant || '',
+      data.restaurant || data.Business || data.business || '',
       data.postcode || '',
       data.phone || '',
       data.service || '',
@@ -106,7 +106,7 @@ New enquiry received on J.P. Nadar website:
 
 Name: ${data.name}
 Email: ${data.email}
-Restaurant: ${data.restaurant}
+Business: ${data.restaurant || data.Business || data.business || 'N/A'}
 Postcode: ${data.postcode}
 Phone: ${data.phone}
 Service: ${data.service}
