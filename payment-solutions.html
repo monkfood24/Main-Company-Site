@@ -466,11 +466,26 @@
       let captchaToken = '';
       if (typeof grecaptcha !== 'undefined') {
         try {
-          captchaToken = await new Promise((resolve) => {
-            window.resolveCaptcha = resolve;
-            grecaptcha.execute();
+          captchaToken = await new Promise((resolve, reject) => {
+            const timer = setTimeout(() => reject(new Error('reCAPTCHA timeout')), 10000);
+            window.resolveCaptcha = (token) => {
+              clearTimeout(timer);
+              resolve(token);
+            };
+            try {
+              grecaptcha.execute();
+            } catch (err) {
+              clearTimeout(timer);
+              reject(err);
+            }
           });
-        } catch (err) { }
+        } catch (err) {
+          console.error("reCAPTCHA Error:", err);
+          alert("reCAPTCHA validation failed. Please try submitting again.");
+          btn.textContent = 'Send Quote Request →';
+          btn.disabled = false;
+          return;
+        }
       }
 
       const payload = {
