@@ -25,7 +25,7 @@
 // ════════════════════════════════════════════════════════════════
 
 const SPREADSHEET_ID = '1HGRrXUq1aEdTDCBOhC-XniV9532VhUQfeJj1YZyltmM'; // ← Replace this
-const RECAPTCHA_SECRET = '6LefB8csAAAAABRwHqR-NPvDch83bB-_NiUHSYYE'; // ← Replace with your reCAPTCHA Secret Key
+const RECAPTCHA_SECRET = '6LefB8csAAAAABIX6XqtXKnTjYM-UbnNXdkbeHEH'; // ← Replace with your reCAPTCHA Secret Key
 
 function doPost(e) {
   try {
