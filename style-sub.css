@@ -2,6 +2,7 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}body{font-family:'DM Sans',sans-serif;background:var(--bg-dark);color:var(--text-white);overflow-x:hidden;}a{text-decoration:none;color:inherit;}
     nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:72px;background:rgba(255,255,255,0.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
     .logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;background:linear-gradient(135deg,var(--purple-light),var(--purple-mid));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+    .header-logo img{height:45px;width:auto;}
     .nav-links{display:flex;align-items:center;gap:2rem;list-style:none;}.nav-links a{font-size:0.9rem;font-weight:500;color:var(--text-muted);transition:color 0.2s;}.nav-links a:hover{color:var(--text-white);}
     .dropdown{position:relative;}.dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:0.5rem 0;min-width:220px;box-shadow:0 20px 60px rgba(0,0,0,0.5);}.dropdown:hover .dropdown-menu{display:block;}.dropdown-menu a{display:block;padding:0.65rem 1.2rem;font-size:0.875rem;color:var(--text-muted);transition:all 0.15s;}.dropdown-menu a:hover{color:var(--gold);background:rgba(201,168,76,0.07);padding-left:1.5rem;}
     .nav-cta{background:linear-gradient(135deg,var(--purple),var(--purple-mid));color:#fff !important;padding:0.5rem 1.2rem;border-radius:6px;font-weight:600 !important;}
@@ -77,4 +78,3 @@
   overflow-y: auto;
   max-height: calc(100vh - 72px);
 }
-

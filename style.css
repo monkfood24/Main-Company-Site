@@ -76,6 +76,11 @@ nav {
   letter-spacing: -0.5px;
 }
 
+.header-logo img {
+  height: 45px;
+  width: auto;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
